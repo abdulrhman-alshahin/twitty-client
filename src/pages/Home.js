@@ -14,7 +14,7 @@ const Home = () => {
     posts = data.getPosts;
   }
   return (
-    <Grid columns={3} container doubling stackable>
+    <Grid columns={3}>
       <Grid.Row className="page-title">
         <h2>Recent Posts</h2>
       </Grid.Row>

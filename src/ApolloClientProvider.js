@@ -7,6 +7,7 @@ import {
 } from "@apollo/client";
 import App from "./App";
 import { setContext } from "apollo-link-context";
+
 const httpLink = createHttpLink({
   uri: "https://frozen-dawn-59943.herokuapp.com/",
 });
