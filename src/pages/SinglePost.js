@@ -1,15 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import moment from "moment";
 import React, { useContext, useState } from "react";
-import {
-  Button,
-  Card,
-  Form,
-  Grid,
-  Icon,
-  Image,
-  Label,
-} from "semantic-ui-react";
+import { Button, Card, Form, Grid, Icon, Image } from "semantic-ui-react";
 import LikeButton from "../components/LikeButton";
 import DeleteButton from "../components/DeleteButton";
 import { FETCH_POST_QUERY, CREATE_COMMENT_MUTATION } from "../util/graphql";
@@ -19,7 +11,7 @@ export default function SinglePost(props) {
   const { user } = useContext(AuthContext);
   const [comment, setComment] = useState("");
   const postId = props.match.params.postId;
-  const { data, loading, error } = useQuery(FETCH_POST_QUERY, {
+  const { data, loading } = useQuery(FETCH_POST_QUERY, {
     variables: { postId },
   });
   const [createComment] = useMutation(CREATE_COMMENT_MUTATION, {
@@ -39,16 +31,8 @@ export default function SinglePost(props) {
   if (loading) {
     postMarkup = <h2 style={{ marginTop: 20 }}>post loading...</h2>;
   } else if (data) {
-    const {
-      id,
-      body,
-      createdAt,
-      username,
-      likesCount,
-      commentsCount,
-      likes,
-      comments,
-    } = data.getPost;
+    const { id, body, createdAt, username, likesCount, likes, comments } =
+      data.getPost;
     postMarkup = (
       <Grid style={{ marginTop: 20 }}>
         <Grid.Row>
@@ -69,14 +53,6 @@ export default function SinglePost(props) {
               <hr />
               <Card.Content extra>
                 <LikeButton user={user} post={{ id, likesCount, likes }} />
-                {/* <Button as="div" labelPosition="right" onClick={commentHandler}>
-                  <Button basic color="blue" size="tiny">
-                    <Icon name="comments" />
-                  </Button>
-                  <Label basic color="blue" pointing="left">
-                    {commentsCount}
-                  </Label>
-                </Button> */}
                 {user && user.username === username && (
                   <DeleteButton postId={id} callback={deletePostCallBack} />
                 )}
