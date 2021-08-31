@@ -30,12 +30,13 @@ export default function DeleteButton({ postId, callback, commentId }) {
   return (
     <>
       <Button
+        className="deleteButton"
         color="youtube"
         size="tiny"
         floated="right"
         onClick={() => setConfirmOpen(true)}
       >
-        <Icon name="trash" /> delete
+        <Icon name="trash" />
       </Button>
       <Confirm
         open={confirmOpen}

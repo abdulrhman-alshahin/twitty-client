@@ -31,28 +31,45 @@ export default function SinglePost(props) {
   if (loading) {
     postMarkup = <h2 style={{ marginTop: 20 }}>post loading...</h2>;
   } else if (data) {
-    const { id, body, createdAt, username, likesCount, likes, comments } =
-      data.getPost;
+    const {
+      id,
+      body,
+      createdAt,
+      username,
+      likesCount,
+
+      likes,
+      comments,
+    } = data.getPost;
     postMarkup = (
-      <Grid style={{ marginTop: 20 }}>
+      <Grid style={{ marginTop: 20 }} className="form-container">
         <Grid.Row>
-          <Grid.Column width={2}>
-            <Image
-              src="https://react.semantic-ui.com/images/avatar/large/elliot.jpg"
-              size="small"
-              floated="right"
-            />
-          </Grid.Column>
-          <Grid.Column width={12}>
+          <Grid.Column>
             <Card fluid>
               <Card.Content>
+                <Image
+                  avatar
+                  floated="right"
+                  size="large"
+                  src="https://react.semantic-ui.com/images/avatar/large/steve.jpg"
+                />
                 <Card.Header>{username}</Card.Header>
                 <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
-                <Card.Description>{body}</Card.Description>
+                <Card.Description className="cardDescription">
+                  {body}
+                </Card.Description>
               </Card.Content>
               <hr />
               <Card.Content extra>
                 <LikeButton user={user} post={{ id, likesCount, likes }} />
+                {/* <Button as="div" labelPosition="right" onClick={commentHandler}>
+                  <Button basic color="blue" size="tiny">
+                    <Icon name="comments" />
+                  </Button>
+                  <Label basic color="blue" pointing="left">
+                    {commentsCount}
+                  </Label>
+                </Button> */}
                 {user && user.username === username && (
                   <DeleteButton postId={id} callback={deletePostCallBack} />
                 )}

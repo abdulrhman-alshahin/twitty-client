@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useQuery } from "@apollo/client";
 import PostCard from "../components/PostCard";
-import { Card, Grid, Transition } from "semantic-ui-react";
+import { Card, Grid, Transition, Loader } from "semantic-ui-react";
 import { AuthContext } from "../context/auth";
 import PostForm from "../components/PostForm";
 import { FETCH_POSTS_QUERY } from "../util/graphql";
@@ -14,11 +14,7 @@ const Home = () => {
     posts = data.getPosts;
   }
   return (
-    <Grid columns={3}>
-      <Grid.Row className="page-title">
-        <h2>Recent Posts</h2>
-      </Grid.Row>
-
+    <Grid columns={3} doubling stackable style={{ marginTop: 10 }}>
       <Grid.Row>
         {user && (
           <Grid.Column>
@@ -26,7 +22,7 @@ const Home = () => {
           </Grid.Column>
         )}
         {loading ? (
-          <h2>loading posts...</h2>
+          <Loader active />
         ) : (
           posts && (
             <>
