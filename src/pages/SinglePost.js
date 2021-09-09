@@ -1,7 +1,15 @@
 import { useMutation, useQuery } from "@apollo/client";
 import moment from "moment";
 import React, { useContext, useState } from "react";
-import { Button, Card, Form, Grid, Icon, Image } from "semantic-ui-react";
+import {
+  Button,
+  Card,
+  Form,
+  Grid,
+  Icon,
+  Image,
+  Loader,
+} from "semantic-ui-react";
 import LikeButton from "../components/LikeButton";
 import DeleteButton from "../components/DeleteButton";
 import { FETCH_POST_QUERY, CREATE_COMMENT_MUTATION } from "../util/graphql";
@@ -29,7 +37,7 @@ export default function SinglePost(props) {
   let postMarkup;
 
   if (loading) {
-    postMarkup = <h2 style={{ marginTop: 20 }}>post loading...</h2>;
+    postMarkup = <Loader active style={{ marginTop: 20 }}></Loader>;
   } else if (data) {
     const {
       id,
